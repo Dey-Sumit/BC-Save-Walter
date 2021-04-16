@@ -1,6 +1,6 @@
 const Delete = () => {
   return (
-    <div className="py-48 px-36">
+    <div className="px-32 py-40">
       <div className="flex flex-col mx-auto space-y-6 w-max">
         <h1 className="text-4xl font-bold text-gray-50 ">
           This is a boilerplate for Next js with TypeScript and Tailwind
