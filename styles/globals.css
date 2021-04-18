@@ -9,8 +9,14 @@ body {
 
 /* create component class */
 
-/* @layer components{
-  .className{
-    @apply <tailwind classes>
+@layer components {
+  .textBlock-wrapper {
+    @apply flex flex-col justify-center p-3 space-y-5 text-white;
   }
-} */
+  .textBlock-title {
+    @apply text-4xl font-medium md:text-6xl;
+  }
+  .textBlock-subtitle {
+    @apply text-base lg:text-lg;
+  }
+}
