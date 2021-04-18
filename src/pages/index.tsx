@@ -1,6 +1,9 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Delete from "@components/Delete";
+
 export default function Home() {
-  const { pathname } = useRouter();
-  return <div>LOL</div>;
+  return (
+    <div>
+      <Delete />
+    </div>
+  );
 }
