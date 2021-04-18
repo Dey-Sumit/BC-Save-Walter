@@ -1,9 +1,6 @@
-import Delete from "@components/Delete";
-
+import Link from "next/link";
+import { useRouter } from "next/router";
 export default function Home() {
-  return (
-    <div className="h-screen bg-gray-800">
-      <Delete />
-    </div>
-  );
+  const { pathname } = useRouter();
+  return <div>LOL</div>;
 }
