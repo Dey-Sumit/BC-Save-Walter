@@ -7,7 +7,8 @@
       "@components/*": ["src/components/*"],
       "@libs/*": ["libs/*"],
       "@models/*": ["models/*"],
-      "@middlewares/*": ["middlewares/*"]
+      "@middlewares/*": ["middlewares/*"],
+      "@styles/*": ["styles/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,
