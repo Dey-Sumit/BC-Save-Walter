@@ -1,4 +1,5 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
+import { PayPalButton } from "react-paypal-button-v2";
 export const DonationAmount: FunctionComponent<{
   amount: Number;
   value: Number;
@@ -18,6 +19,21 @@ export const DonationAmount: FunctionComponent<{
 
 const donate = () => {
   const [amount, setAmount] = useState(10);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+
+  useEffect(() => {
+    const addPaypalScript = () => {
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://www.paypal.com/sdk/js?client-id=AUYYe_jA-9FTUNZF-UFRISfMvUAnKTzxAb1pELVDW36PaFFvg_a3YXGJfgrc32USF79FL3C59jTluzvc`;
+      script.async = true;
+
+      script.onload = () => setScriptLoaded(true);
+
+      document.body.appendChild(script);
+    };
+    addPaypalScript();
+  }, []);
 
   return (
     <div className="grid h-full gap-2 p-6 lg:px-24 md:grid-cols-2">
@@ -40,8 +56,17 @@ const donate = () => {
             <DonationAmount value={5} setAmount={setAmount} amount={amount} />
             <DonationAmount value={10} setAmount={setAmount} amount={amount} />
           </div>
-
-          <button>Donate</button>
+          {scriptLoaded ? (
+            <PayPalButton
+              amount={amount}
+              onSuccess={(details, data) => {
+                //save the transaction
+                console.log(details);
+              }}
+            />
+          ) : (
+            <span>Loading...</span>
+          )}{" "}
         </div>
       </div>
     </div>
