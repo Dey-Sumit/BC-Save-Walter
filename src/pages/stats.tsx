@@ -1,6 +1,13 @@
 //TODO this page getServerSideProps
 
-const stats = ({ donations }) => {
+import { IDonation } from "@libs/types";
+import { NextPage } from "next";
+
+const stats: NextPage<{ donations: IDonation[] }> = ({ donations }) => {
+  const getTotalDonation = (): String => {
+    const total = donations.reduce((acc, donation) => acc + donation.amount, 0);
+    return `${total}$`;
+  };
   return (
     <div className="grid h-full gap-5 p-6 lg:px-24 md:grid-cols-2">
       <div className="flex flex-col justify-center space-y-3 text-white ">
@@ -9,29 +16,42 @@ const stats = ({ donations }) => {
             Total Donations
           </h1>
           <span className="px-6 py-4 text-2xl tracking-wide cursor-pointer md:text-3xl bg-gray-light">
-            120$
+            {getTotalDonation()}
           </span>
         </div>
       </div>
       <div className="flex flex-col justify-center space-y-3 text-center">
         <h1 className="mb-4 text-2xl font-medium md:text-5xl text-yellow">
-          Top Donators
+          Last 5 Donators
         </h1>
         {
           //todo add type
-          [...Array(5)].map((d, i) => (
+          donations.map((d, i) => (
             <div
               className="flex justify-between px-6 py-3 text-xl cursor-pointer bg-gray-dark"
               key={i}
             >
-              <span>Sam</span>
-              <span>10$</span>
+              <span>{d.name}</span>
+              <span>{d.amount}$</span>
             </div>
           ))
         }
       </div>
     </div>
   );
+};
+
+export const getServerSideProps = async () => {
+  //todo change localhost to env
+  const res = await fetch("http://localhost:3001/api/donations");
+  const data = await res.json();
+  console.log(data);
+
+  return {
+    props: {
+      donations: data,
+    },
+  };
 };
 
 export default stats;

@@ -35,6 +35,22 @@ const donate = () => {
     addPaypalScript();
   }, []);
 
+  const addDonationInDB = async (name: string) => {
+    try {
+      const res = await fetch("http://localhost:3001/api/donations/", {
+        method: "POST",
+        body: JSON.stringify({
+          name,
+          amount,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="grid h-full gap-2 p-6 lg:px-24 md:grid-cols-2">
       <div className="textBlock-wrapper">
@@ -61,7 +77,8 @@ const donate = () => {
               amount={amount}
               onSuccess={(details, data) => {
                 //save the transaction
-                console.log(details);
+                // console.log(details);
+                addDonationInDB(details.payer.name.given_name);
               }}
             />
           ) : (

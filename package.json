@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start ",
     "data:import": "ts-node --project tsconfig.seeder.json seeder.ts",
     "data:destroy": "ts-node --project tsconfig.seeder.json seeder.ts -d"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "dotenv": "^9.0.0",
     "mongoose": "^5.12.3",
     "morgan": "^1.10.0",

@@ -1,6 +1,9 @@
-import { quotes } from "@libs/data";
+// import { quotes } from "@libs/data";
+import { GetServerSidePropsContext, GetStaticPropsContext } from "next";
 import Image from "next/image";
-const people = () => {
+const people = ({ quotes }) => {
+  console.log({ quotes });
+
   return (
     <div className="grid h-full gap-5 p-6 lg:px-24 md:grid-cols-2">
       <div className="textBlock-wrapper">
@@ -39,3 +42,41 @@ const people = () => {
 };
 
 export default people;
+
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+  // console.log(" getServerSideProps executed");
+  let data;
+  try {
+    const res = await fetch("http://localhost:3001/api/quotes");
+    data = await res.json();
+  } catch (error) {
+    console.log(error.message);
+  }
+  // console.log("called", data);
+
+  return {
+    props: {
+      quotes: data ?? [],
+    },
+    revalidate: 10,
+  };
+};
+// export const getServerSideProps = async (
+//   context: GetServerSidePropsContext
+// ) => {
+//   // console.log(" getServerSideProps executed");
+//   let data;
+//   try {
+//     const res = await fetch("http://localhost:3000/api/quotes");
+//     data = await res.json();
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+//   // console.log(data);
+
+//   return {
+//     props: {
+//       quotes: data ?? [],
+//     },
+//   };
+// };
