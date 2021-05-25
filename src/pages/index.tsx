@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 
 export default function Home() {
   const { push } = useRouter();
+  console.log(process.env.VERCEL_URL);
+
   return (
     <div className="grid p-5 lg:px-24 md:grid-cols-2">
       <div className="textBlock-wrapper">
