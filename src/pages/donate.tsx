@@ -5,6 +5,8 @@ export const DonationAmount: FunctionComponent<{
   value: Number;
   setAmount: Function;
 }> = ({ amount, setAmount, value }) => {
+  console.log(process.env.NEXT_PUBLIC_VERCEL_URL);
+
   return (
     <span
       className={`px-4 py-2 text-lg cursor-pointer bg-gray-light ${
@@ -37,13 +39,16 @@ const donate = () => {
 
   const addDonationInDB = async (name: string) => {
     try {
-      const res = await fetch(`${process.env.VERCEL_URL}/api/donations/`, {
-        method: "POST",
-        body: JSON.stringify({
-          name,
-          amount,
-        }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/donations/`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            name,
+            amount,
+          }),
+        }
+      );
       const data = await res.json();
       console.log(data);
     } catch (error) {
