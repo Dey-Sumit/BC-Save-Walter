@@ -44,8 +44,10 @@ const stats: NextPage<{ donations: IDonation[] }> = ({ donations }) => {
 export const getServerSideProps = async () => {
   //todo change localhost to env
   console.log(process.env.VERCEL_URL);
+  console.log(`${process.env.VERCEL_URL}/api/donations`);
 
   const res = await fetch(`${process.env.VERCEL_URL}/api/donations`);
+
   const data = await res.json();
   console.log(data);
 
