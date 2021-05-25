@@ -47,7 +47,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   // console.log(" getServerSideProps executed");
   let data;
   try {
-    const res = await fetch("http://localhost:3001/api/quotes");
+    const res = await fetch(`${process.env.VERCEL_URL}/api/quotes`);
     data = await res.json();
   } catch (error) {
     console.log(error.message);
