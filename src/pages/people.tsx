@@ -47,10 +47,10 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   // console.log(" getServerSideProps executed");
   let data;
   try {
-    const res = await fetch(`${process.env.VERCEL_URL}/api/quotes`);
+    const res = await fetch(`${process.env.API_BASE_ENDPOINT}/api/quotes`);
     data = await res.json();
   } catch (error) {
-    console.log(error.message);
+    console.log("Error ", error.message);
   }
   // console.log("called", data);
 

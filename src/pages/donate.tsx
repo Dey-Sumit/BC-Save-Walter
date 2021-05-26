@@ -5,7 +5,7 @@ export const DonationAmount: FunctionComponent<{
   value: Number;
   setAmount: Function;
 }> = ({ amount, setAmount, value }) => {
-  console.log(process.env.NEXT_PUBLIC_VERCEL_URL);
+  console.log(process.env.API_BASE_ENDPOINT);
 
   return (
     <span
@@ -40,7 +40,7 @@ const donate = () => {
   const addDonationInDB = async (name: string) => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/donations/`,
+        `${process.env.NEXT_PUBLIC_API_BASE_ENDPOINT}/api/donations/`,
         {
           method: "POST",
           body: JSON.stringify({
