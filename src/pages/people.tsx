@@ -53,6 +53,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     console.log("Error ", error.message);
   }
   // console.log("called", data);
+  console.log(`${process.env.API_BASE_ENDPOINT}/api/quotes`);
 
   return {
     props: {
